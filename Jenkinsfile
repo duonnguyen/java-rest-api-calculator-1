@@ -20,5 +20,16 @@ pipeline {
                 }
             }
         }
+
+        stage('Publish') {
+            steps {
+                sh './mvnw package'
+            }
+            post {
+                success {
+                    archiveArtifacts 'target/*jar'
+                }
+            }
+        }
     }
 }
